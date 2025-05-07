@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+body{
+  font-family: 'JetBrains Mono', monospace;
+  background-color: #1e1e1e;
+  color: #dcdcdc;
+  cursor: url('/cursor.png'), pointer;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('assets/fonts/JetBrainsMono-Medium.woff2') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

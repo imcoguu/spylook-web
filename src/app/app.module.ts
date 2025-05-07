@@ -8,6 +8,7 @@ import {FooterComponent} from './components/footer/footer.component';
 import {HeaderComponent} from './components/header/header.component';
 import {HeroComponent} from './components/hero/hero.component';
 import {TestimonialsComponent} from './components/testimonials/testimonials.component';
+import {NgOptimizedImage} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {TestimonialsComponent} from './components/testimonials/testimonials.comp
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgOptimizedImage
   ],
   providers: [],
   bootstrap: [AppComponent]
