@@ -1,12 +1,15 @@
 .gradient-border {
   position: relative;
-  background: rgba(0, 0, 0, 0.8); /* Fondo semitransparente */
-  border-radius: 8px;
-  border: 5px solid;
-border-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet) 1;
-  overflow: hidden;
+  border-radius: 10px;
+  border: double 3px transparent;
+  background-image: linear-gradient(black,black), linear-gradient(to right, red, yellow);
+  background-origin: border-box;
+  background-clip: content-box, padding-box;
+  padding: 3px;
 }
-
+.text {
+  margin: 15px;
+}
 .gradient-border::before {
   content: '';
   position: absolute;
@@ -18,18 +21,15 @@ border-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo
   background-size: 400% 400%;
   animation: gradient-move 3s infinite;
   z-index: -1;
-  border-radius: inherit;
 }
+
 .gradient-border:hover::before {
-   background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet, red);
-   background-size: 400% 400%;
-   animation: gradient-move 3s infinite;
- }
-.rainbow-border {
-  border: 4px solid;
-  border-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet, red) 1;
-  border-radius: 12px; /* Borde redondeado */
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet, red);
+  background-size: 400% 400%;
+  animation: gradient-move 3s infinite;
 }
+
+
 @keyframes gradient-move {
   0% {
     background-position: 0% 50%;
