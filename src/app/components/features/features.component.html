@@ -13,6 +13,21 @@
             <p class="text-gray-400 text-justify">Guarda información básica como fecha de nacimiento, localidad, estado
               y
               pais</p>
+            <br>
+            <div class="bg-gray-800 text-white p-4 rounded-lg shadow-md text-left">
+              <code class="text-sm" style="font-family: 'JetBrains Mono ExtraLight',monospace">
+                val nombre = editTextNombre!!.getText().toString()<br>
+                val nick = editTextNick!!.getText().toString()<br>
+                val cumpleanos = LocalDate.parse(<br>
+                &nbsp;&nbsp;editTextCumpleanos!!.getText().toString(),<br>
+                &nbsp;&nbsp;DateTimeFormatter.ofPattern("dd/MM/yyyy")<br>
+                ).toString()<br>
+                val ciudad = editTextCiudad!!.getText().toString()<br>
+                val estado = editTextEstado!!.getText().toString()<br>
+                val pais = editTextPais!!.getText().toString()<br>
+              </code>
+            </div>
+            <br>
             <p class="text-gray-400 text-justify">Todos los datos son almacenados en una base de datos local SQLite,
               bajo
               la capa de abstracción de Android Room</p>
@@ -51,6 +66,33 @@
             <h3 class="text-xl font-semibold mb-2 rainbow-text">Filtra los contactos</h3>
             <p class="text-gray-400 text-justify">El menú principal cuenta con un potente buscador en tiempo real que te
               permite filtrar de forma rápida y visual los contactos por sus apodos</p>
+            <br>
+            <div class="bg-gray-800 text-white p-4 rounded-lg shadow-md text-left">
+              <code class="text-sm" style="font-family: 'JetBrains Mono ExtraLight',monospace">
+                &nbsp;&nbsp;runBlocking &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val contactos: List&lt;Contacto?&gt;? =<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;db.contactoDAO()!!.getContactos();<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val collect = contactos!!.stream()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter &#123; i: Contacto? -><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i!!.alias!!.lowercase(Locale.getDefault()).contains(busqueda)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map &#123; contacto -> mapper.toCardItem(contacto) &#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collect(Collectors.toList())<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val mutableCollect = collect.toMutableList()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;if (mutableCollect.isEmpty()) &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mutableCollect.add(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ContactoCardItem(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Sin resultados",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+                &#125;<br>
+              </code>
+            </div>
           </div>
         </div>
         <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border">
