@@ -3,7 +3,7 @@ body{
   font-family: 'JetBrains Mono', monospace;
   background-color: #1e1e1e;
   color: #dcdcdc;
-  cursor: url('/cursor.png'), pointer;
+  cursor: url('assets/cursor.png'), pointer;
 }
 @font-face {
   font-family: 'JetBrains Mono';
@@ -45,7 +45,6 @@ body{
   transform: scale(1.1);
   font-size: 1.4rem;
   box-shadow: 0 0 10px #48bb78, 0 0 20px #48bb78, 0 0 30px #48bb78;
-  cursor: url('/pointer.png'), none;
 }
 
 .rainbow-text {
@@ -54,7 +53,10 @@ body{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: background-position 0.1s ease;
+}
 
+.clickable:hover {
+  cursor: url("assets/pointer.png"), none;
 }
 
 @keyframes gradient-move {

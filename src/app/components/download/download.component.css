@@ -7,6 +7,5 @@ img{
 
 img:hover{
   box-shadow: 0 0 10px #FFFFFFA1, 0 0 20px #FFFFFFA1, 0 0 30px #FFFFFFA1;
-  cursor: url('/pointer.png'), none;
   transform: scale(1.1);
 }

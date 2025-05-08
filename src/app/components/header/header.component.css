@@ -1,6 +1,3 @@
 a{
   transition: transform 1.6s ease, font-size 0.2s ease;
 }
-a:hover{
-  cursor: url('/pointer.png'), none;
-}
