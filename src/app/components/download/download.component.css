@@ -1,19 +1,12 @@
-a{
-  background-image: url("assets/available_on_github.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 200px;
-  height: 70px;
+img{
   display: inline-block;
   text-decoration: none;
   font-size: 0;
   transition: transform 0.3s ease, font-size 0.2s ease , box-shadow 0.4s ease;
 }
 
-a:hover{
+img:hover{
   box-shadow: 0 0 10px #FFFFFFA1, 0 0 20px #FFFFFFA1, 0 0 30px #FFFFFFA1;
   cursor: url('/pointer.png'), none;
   transform: scale(1.1);
-
 }
