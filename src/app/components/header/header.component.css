@@ -1,3 +1,9 @@
 a{
   transition: transform 1.6s ease, font-size 0.2s ease;
 }
+h1{
+  transition: transform 0.2s ease, font-size 0.2s ease;
+}
+h1:hover{
+  transform: scale(1.1);
+}
