@@ -7,8 +7,8 @@ import {FeaturesComponent} from './components/features/features.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {HeaderComponent} from './components/header/header.component';
 import {HeroComponent} from './components/hero/hero.component';
-import {TestimonialsComponent} from './components/testimonials/testimonials.component';
 import {NgOptimizedImage} from '@angular/common';
+import { DownloadComponent } from './components/download/download.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import {NgOptimizedImage} from '@angular/common';
     FooterComponent,
     HeaderComponent,
     HeroComponent,
-    TestimonialsComponent
+    DownloadComponent
   ],
   imports: [
     BrowserModule,

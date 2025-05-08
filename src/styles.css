@@ -11,3 +11,72 @@ body{
   font-weight: normal;
   font-style: normal;
 }
+
+.gradient-border {
+  position: relative;
+  border-radius: 10px;
+  border: double 3px transparent;
+  background-image: linear-gradient(black,black), linear-gradient(to right, red, yellow);
+  background-origin: border-box;
+  background-clip: content-box, padding-box;
+  padding: 3px;
+}
+
+.text {
+  margin: 15px;
+}
+
+.gradient-animated {
+  background: linear-gradient(to right, #ff0000, #00ff00, #000dff);
+  background-size: 300% 300%;
+  animation: gradient-animation 6s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-button {
+  background: linear-gradient(to right, #ff0000, #00ff00, #000dff);
+  background-size: 300% 300%;
+  animation: gradient-animation 6s ease infinite;
+  transition: transform 1.6s ease, box-shadow 0.4s ease, font-size 0.4s ease;
+}
+
+.gradient-button:hover {
+  transform: scale(1.1);
+  font-size: 1.4rem;
+  box-shadow: 0 0 10px #48bb78, 0 0 20px #48bb78, 0 0 30px #48bb78;
+  cursor: url('/pointer.png'), none;
+}
+
+.rainbow-text {
+  background: linear-gradient(to right, #ff1100, #ffff00, #1aff00,#00c3ff, #d400ff, #ff1100);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 0.1s ease;
+
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
