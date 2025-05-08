@@ -1,10 +1,40 @@
 @import "tailwindcss";
-body{
+
+body {
   font-family: 'JetBrains Mono', monospace;
-  background-color: #1e1e1e;
   color: #dcdcdc;
   cursor: url('assets/cursor.png'), pointer;
+  min-height: 100vh; /* Asegura que el body ocupe toda la altura de la página */
+  width: 100%; /* Asegura que ocupe todo el ancho */
+  margin: 0; /* Elimina márgenes innecesarios */
+  padding: 0; /* Elimina padding innecesario */
+  display: flex; /* Asegura que el contenido se ajuste */
+  flex-direction: column;
+  background-color: #1e1e1e;
+  transition: 0.3s
 }
+
+.stickyimg{
+  max-width: 40%;
+  min-width: 25vh;
+  margin-right:3vh
+}
+body {
+  overflow-x: hidden; /* Oculta contenido que sobresalga horizontalmente */
+  word-wrap: break-word; /* Ajusta texto largo automáticamente */
+}
+
+* {
+  box-sizing: border-box; /* Incluye padding y border en el cálculo del tamaño */
+  transition: 0.3s
+}
+
+/* Ajustar elementos sobresalientes */
+.gradient-border, .container, section {
+  max-width: 100%; /* Evita que los elementos superen el ancho del viewport */
+  transition: 0.3s
+}
+
 @font-face {
   font-family: 'JetBrains Mono';
   src: url('assets/fonts/JetBrainsMono-Medium.woff2') format('truetype');
@@ -16,14 +46,16 @@ body{
   position: relative;
   border-radius: 10px;
   border: double 3px transparent;
-  background-image: linear-gradient(black,black), linear-gradient(to right, red, yellow);
+  background-image: linear-gradient(black, black), linear-gradient(to right, red, yellow);
   background-origin: border-box;
   background-clip: content-box, padding-box;
   padding: 3px;
+  transition: 0.3s
 }
 
 .text {
   margin: 15px;
+  transition: 0.3s
 }
 
 .gradient-animated {
@@ -32,6 +64,7 @@ body{
   animation: gradient-animation 6s ease infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  transition: 0.3s
 }
 
 .gradient-button {
@@ -45,10 +78,11 @@ body{
   transform: scale(1.1);
   font-size: 1.4rem;
   box-shadow: 0 0 10px #48bb78, 0 0 20px #48bb78, 0 0 30px #48bb78;
+  transition: 0.3s
 }
 
 .rainbow-text {
-  background: linear-gradient(to right, #ff1100, #ffff00, #1aff00,#00c3ff, #d400ff, #ff1100);
+  background: linear-gradient(to right, #ff1100, #ffff00, #1aff00, #00c3ff, #d400ff, #ff1100);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -57,6 +91,7 @@ body{
 
 .clickable:hover {
   cursor: url("assets/pointer.png"), none;
+  transition: 0.3s
 }
 
 @keyframes gradient-move {
@@ -80,5 +115,50 @@ body{
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 1168px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .gradient-border {
+    display: block;
+    margin: 1rem auto;
+  }
+
+  .text {
+    text-align: left;
+    font-size: 0.9rem; /* Reducir tamaño de fuente */
+    margin: 0.5rem;
+  }
+
+  .rainbow-text {
+    font-size: 1.2rem; /* Ajustar tamaño en móviles */
+    margin-bottom: 1rem;
+  }
+
+  section{
+    padding: 0 1rem; /* Ajustar padding para móviles */
+    margin: 0 auto; /* Centrar sección */
+  }
+  .gradient-button {
+    padding: 0.8rem;
+    font-size: 1rem;
+    width: 100%; /* Botón ocupa todo el ancho en móviles */
+  }
+
+
+  h3 + p {
+    text-align: left;
+  }
+
+  h2{
+    word-break: keep-all;
+  }
+  code {
+    font-size: 0.6rem; /* Reducir tamaño de fuente del código */
+    word-wrap: break-word; /* Permitir que las líneas largas se ajusten */
   }
 }

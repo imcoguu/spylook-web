@@ -1,0 +1,10 @@
+section{
+  padding-right: 10vh;
+  transition: 0.3s
+}
+
+@media(max-width: 1168px) {
+  section{
+    padding-right: 0vh;
+  }
+}
