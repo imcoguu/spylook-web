@@ -105,7 +105,7 @@
         <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border">
           <div class="text">
             <h3 class="text-xl font-semibold mb-2 rainbow-text">...y asócialos a las personas culpables</h3>
-            <p class="text-gray-400 text-justify">Para dejar constancia de quién fue el cabezilla y quienes ayudaron</p>
+            <p class="text-gray-400 text-justify">Para dejar constancia de quién fue el cabecilla y quienes ayudaron</p>
           </div>
         </div>
         <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border">
@@ -120,7 +120,7 @@
             <h3 class="text-xl font-semibold mb-2 rainbow-text">¿Quién se llevaba con quién? ¡Apúntalo y no te
               olvides!</h3>
             <p class="text-gray-400 text-justify">Con pulsar unos pocos botones podrás recordar las relaciones entre tus
-              contactos, porque aquí nadie quiere muy cerca a gente que se relacione con gentuza, ¿verdad?</p>
+              contactos, porque aquí nadie quiere muy cerca a gente que se relacione con indeseables, ¿verdad?</p>
           </div>
         </div>
         <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border">
@@ -132,9 +132,16 @@
             <br>
             <div class="bg-gray-800 text-white p-4 rounded-lg shadow-md text-left">
               <code class="text-sm" style="font-family: 'JetBrains Mono ExtraLight',monospace">
-                runBlocking &#123;<br>
-                &nbsp;&nbsp;db!!.contactoDAO()!!.addContacto(contacto)<br>
-                &#125;
+                &nbsp;&nbsp;val amistades = db?.contactoDAO()?.getAmigosDeContacto(contacto.id)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;?.amigos<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;?.filter &#123; it !in newExcluded &#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;?.map &#123; amigo -><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;async &#123; toSingleExportObject(amigo!!, context, deepLevel - 1, newExcluded) &#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;?.map &#123; it.await() &#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;?: emptyList()<br>
+                <br>
+                &nbsp;&nbsp;return&#64;coroutineScope SingleExportObject(contacto, anotaciones, sucesos, amistad<br>
               </code>
             </div>
             <br>
