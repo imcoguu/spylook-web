@@ -29,7 +29,6 @@ export class FeaturesComponent implements OnInit {
         // Calcula la posición del gradiente para que el rojo siga al ratón
         const percentage = 100 - (x / width) * 100; // Invertir la posición del rojo basada en el ratón // Posición del rojo basada en el ratón
         (element as HTMLElement).style.setProperty('background-image', `linear-gradient(black,black), linear-gradient(${percentage}deg, ${this.getNextColor(i)})`);
-        console.log(percentage);
       });
     }
   }
