@@ -9,6 +9,8 @@ import {HeaderComponent} from './components/header/header.component';
 import {HeroComponent} from './components/hero/hero.component';
 import {NgOptimizedImage} from '@angular/common';
 import { DownloadComponent } from './components/download/download.component';
+import {provideHttpClient} from '@angular/common/http';
+import {MarkdownComponent, provideMarkdown} from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import { DownloadComponent } from './components/download/download.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    MarkdownComponent
   ],
-  providers: [],
+  providers: [provideHttpClient(), provideMarkdown()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

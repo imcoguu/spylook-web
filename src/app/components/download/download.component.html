@@ -3,16 +3,13 @@
     <h2 class="text-3xl font-bold mb-10 gradient-animated">¡Descarga ya nuestra app para Android!</h2>
     <div class="p-6 shadow-lg bg-gray-800 text-right gradient-border">
       <div class="text">
-      <h3 class="text-xl font-semibold rainbow-text">¡Recuerda!</h3>
-        <p class="text-gray-400 text-justify">Lo que estás a punto de descargar es un archivo .APK sin firmar.
-          Para poder instalar la aplicación asegúrate de permitir la descarga de aplicaciones de origen desconocido</p>
-        <p class="text-gray-400 text-justify">Al no contar con una firma válida, Google Play Protect lanzará un aviso
-          sobre no poder asegurar la fiabilidad de la app, pero nuestra aplicación es de <b>código abierto</b> por lo que cualquier
-          persona con los conocimientos adecuados puede revisarla por dentro</p>
+      <h3 class="text-xl font-semibold rainbow-text">Último release: {{releaseVersion}}</h3>
+        <p class="text-gray-400 text-justify">
+          <markdown [data]="releaseNotes"></markdown>
       </div>
     </div>
     <br>
-    <a href="https://github.com/cdominguezh06/spylook/releases/download/v.0.1.1/SpyLook.apk">
+    <a [href]="downloadUrl">
       <img class="clickable" ngSrc="assets/available_on_github.png" alt="Descargar" height="100" width="300"/>
     </a>
   </div>
