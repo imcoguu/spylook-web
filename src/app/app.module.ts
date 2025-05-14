@@ -12,6 +12,7 @@ import { DownloadComponent } from './components/download/download.component';
 import {provideHttpClient} from '@angular/common/http';
 import {MarkdownComponent, provideMarkdown} from 'ngx-markdown';
 import { TimelineComponent } from './components/timeline/timeline.component';
+import {ReplaceTagsPipe} from './pipes/replace-tags.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TimelineComponent } from './components/timeline/timeline.component';
     HeaderComponent,
     HeroComponent,
     DownloadComponent,
-    TimelineComponent
+    TimelineComponent,
+    ReplaceTagsPipe
   ],
   imports: [
     BrowserModule,

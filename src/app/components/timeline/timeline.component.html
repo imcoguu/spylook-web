@@ -6,7 +6,7 @@
       <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-2 top-6 border-2 border-gray-600"></div>
       <h2 class="text-2xl font-bold mb-6 ml-8 gradient-animated">Versiones antiguas</h2>
       <div *ngFor="let releaseObject of releases"
-           class="mb-10 ml-6 flex flex-col bg-black rounded-lg shadow-lg p-6 gradient-border">
+           class="mb-10 ml-6 flex flex-col bg-black rounded-lg shadow-lg p-6 gradient-border" #gradientBorder>
         <div class="text">
           <div class="flex justify-between items-center">
             <h3 class="text-xl font-semibold rainbow-text">{{ releaseObject.release.name }}</h3>
@@ -22,9 +22,8 @@
             class="overflow-hidden transition-[max-height] duration-300 ease-in-out"
             [ngClass]="{'max-h-0': releaseObject.hidden, 'max-h-[500px]': !releaseObject.hidden}"
           >
-            <p class="mt-4  whitespace-pre-line">
-              {{ releaseObject.release.body }}
-            </p>
+            <markdown [data]="releaseObject.release.body | replaceTags" >
+            </markdown>
             <a
               [href]="releaseObject.release.html_url"
               target="_blank"

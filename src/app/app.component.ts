@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {GlobalEffectsService} from './services/global-effects.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,15 @@ import { Component } from '@angular/core';
   standalone: false,
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'spylook-web';
+
+
+  constructor(private globalEffectsService: GlobalEffectsService
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.globalEffectsService.applyGlobalEffects();
+  }
 }

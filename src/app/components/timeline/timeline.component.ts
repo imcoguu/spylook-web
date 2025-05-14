@@ -8,7 +8,8 @@ import {GitHubService} from '../../services/git-hub.service';
   styleUrl: './timeline.component.css'
 })
 export class TimelineComponent implements OnInit {
-  releases: {release: any, hidden : boolean}[] = []
+  releases: { release: any, hidden: boolean }[] = []
+
   constructor(private gitHubService: GitHubService) {
   }
 
@@ -16,7 +17,7 @@ export class TimelineComponent implements OnInit {
     this.gitHubService.getAllReleases().subscribe({
       next: (data) => {
         data.forEach(release => {
-          this.releases.push({release, hidden :true});
+          this.releases.push({release, hidden: true});
         })
         this.releases.shift()
       },
@@ -28,7 +29,6 @@ export class TimelineComponent implements OnInit {
       },
 
     });
-
   }
 
 }

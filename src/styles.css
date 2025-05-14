@@ -162,3 +162,21 @@ body {
     word-wrap: break-word; /* Permitir que las líneas largas se ajusten */
   }
 }
+
+.note-block {
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.note-block.warning {
+  color: #b30000;
+  border-left: 5px solid #b30000;
+}
+
+.note-block.note {
+  color: #0059b3;
+  border-left: 5px solid #0059b3;
+}
+
