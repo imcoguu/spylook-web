@@ -12,30 +12,18 @@ export class ReplaceTagsPipe implements PipeTransform {
 
     // Reemplaza [!Warning] con un bloque estilizado
     value = value.replace(
-      /\[!Warning\]/g,
-      `<div class="note-block warning"><strong>⚠️ Warning:</strong></div>`
+      /\[!Warning\](.+?)(?=\[!|$)/gs,
+      `<div class="note-block warning"><strong>⚠️ Aviso:</strong><br>$1</div>`
     );
 
-    // Reemplaza [!Note] con un bloque estilizado
+    // Reemplaza [!Note] con un bloque estilizado y captura el contenido hasta el siguiente marcador o el final
     value = value.replace(
-      /\[!Note\]/g,
-      `<div class="note-block note"><strong>📌 Note:</strong></div>`
-    );
-    // Detecta texto con ": -" para procesar como lista (caso concreto)
-    value = value.replace(
-      /(:)\s*(-\s.+)/g, // Busca ": -" seguido de texto
-      (_, prefix, listItems) => {
-        // Separa los elementos de la lista (divididos por "-")
-        const items = listItems
-          .split('-') // Divide por guiones
-          .filter((item: string) => item.trim() !== '') // Filtra entradas vacías
-          .map((item: string) => `<li>${item.trim()}</li>`) // Convierte en <li>...</li>
-          .join(''); // Une todos los elementos en una cadena
-        return `${prefix}<br><ul class="styled-list">${items}</ul>`; // Devuelve la lista formateada
-      }
+      /\[!Note\](.+?)(?=\[!|$)/gs,
+      `<div class="note-block note"><strong>📌 Notas:</strong><br>$1</div>`
     );
 
-    return value;
+    return value.replace(/-\s/g, '\n- ✓ ');
+
 
   }
 }
