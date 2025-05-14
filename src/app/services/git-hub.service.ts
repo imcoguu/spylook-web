@@ -16,4 +16,10 @@ export class GitHubService {
     return this.http.get(url);
   }
 
+  getAllReleases(): Observable<any[]> {
+    const url = `${this.apiUrl}/repos/${this.owner}/${this.repo}/releases`;
+    return this.http.get<any[]>(url);
+  }
+
+
 }

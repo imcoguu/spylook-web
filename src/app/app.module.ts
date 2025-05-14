@@ -11,6 +11,7 @@ import {NgOptimizedImage} from '@angular/common';
 import { DownloadComponent } from './components/download/download.component';
 import {provideHttpClient} from '@angular/common/http';
 import {MarkdownComponent, provideMarkdown} from 'ngx-markdown';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MarkdownComponent, provideMarkdown} from 'ngx-markdown';
     FooterComponent,
     HeaderComponent,
     HeroComponent,
-    DownloadComponent
+    DownloadComponent,
+    TimelineComponent
   ],
   imports: [
     BrowserModule,

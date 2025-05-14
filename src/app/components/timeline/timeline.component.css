@@ -1,0 +1,23 @@
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hidden {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden; /* Asegura que no se vea el contenido */
+  transition: max-height 0.3s ease, opacity 0.3s ease; /* Transición suave */
+}
+
+.visible {
+  max-height: 500px; /* Un valor grande que cubre el tamaño del contenido */
+  opacity: 1;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
