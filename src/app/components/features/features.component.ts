@@ -8,4 +8,5 @@ import {Component} from '@angular/core';
 })
 export class FeaturesComponent {
 
+  protected selected: string = "assets/phone/phone_newcontact.webp"
 }

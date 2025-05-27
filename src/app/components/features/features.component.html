@@ -1,13 +1,14 @@
 <section id="features" class="py-40 bg-black text-white relative">
   <div class="container mx-auto text-right flex flex-wrap">
     <div class="sticky top-10.5 left-0 w-1/2 h-[90vh] flex justify-center items-center">
-      <img ngSrc="assets/phone/phone_newcontact.webp" alt="Teléfono" class="w-6/8 h-auto object-contain stickyimg" height="2513"
+      <img ngSrc="{{selected}}" alt="Teléfono" class="w-6/8 h-auto object-contain stickyimg" height="2513"
            width="1187"/>
     </div>
     <div class="w-1/2 ml-auto">
       <h2 class="text-3xl font-bold mb-10">Características</h2>
       <div class="grid grid-cols-1 gap-8">
-        <div class="p-6 shadow-lg bg-gray-800 text-right gradient-border" #gradientBorder>
+        <div class="p-6 shadow-lg bg-gray-800 text-right gradient-border"
+             (mouseenter)="this.selected = 'assets/phone/phone_newcontact.webp'" #gradientBorder>
           <div class="text">
             <h3 class="text-xl font-semibold mb-2 rainbow-text">Agrega nuevos contactos</h3>
             <p class="text-gray-400 text-justify">Guarda información básica como fecha de nacimiento, localidad, estado
@@ -28,15 +29,18 @@
               </code>
             </div>
             <br>
-            <p class="text-gray-400 text-justify">Todos los datos de la agenda son almacenados en una base de datos local SQLite,
+            <p class="text-gray-400 text-justify">Todos los datos de la agenda son almacenados en una base de datos
+              local SQLite,
               bajo
               la capa de abstracción de Android Room</p>
           </div>
         </div>
-        <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border" #gradientBorder>
+        <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border"
+             (mouseenter)="this.selected = 'assets/phone/phone_newnote.webp'" #gradientBorder>
           <div class="text">
             <h3 class="text-xl font-semibold mb-2 rainbow-text">Añade anotaciones</h3>
-            <p class="text-gray-400 text-justify">La base de datos local de la agenda está diseñada para admitir infinitas
+            <p class="text-gray-400 text-justify">La base de datos local de la agenda está diseñada para admitir
+              infinitas
               anotaciones
               personalizadas de cada contacto.</p>
             <br>
@@ -61,10 +65,12 @@
               creación</p>
           </div>
         </div>
-        <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border" #gradientBorder>
+        <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border"
+             (mouseenter)="this.selected = 'assets/phone/phone_search.webp'" #gradientBorder>
           <div class="text">
             <h3 class="text-xl font-semibold mb-2 rainbow-text">Filtra los contactos</h3>
-            <p class="text-gray-400 text-justify">El menú principal de la agenda cuenta con un potente buscador en tiempo real que te
+            <p class="text-gray-400 text-justify">El menú principal de la agenda cuenta con un potente buscador en
+              tiempo real que te
               permite filtrar de forma rápida y visual los contactos por sus apodos</p>
             <br>
             <div class="bg-gray-800 text-white p-4 rounded-lg shadow-md text-left">
@@ -98,7 +104,8 @@
         <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border" #gradientBorder>
           <div class="text">
             <h3 class="text-xl font-semibold mb-2 rainbow-text">Añade sucesos...</h3>
-            <p class="text-gray-400 text-justify">Para anotar en la agenda cualquier cosa que ciertas personas indeseables te hayan
+            <p class="text-gray-400 text-justify">Para anotar en la agenda cualquier cosa que ciertas personas
+              indeseables te hayan
               hecho</p>
           </div>
         </div>
@@ -108,11 +115,32 @@
             <p class="text-gray-400 text-justify">Para dejar constancia de quién fue el cabecilla y quienes ayudaron</p>
           </div>
         </div>
-        <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border" #gradientBorder>
+        <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border"
+             (mouseenter)="this.selected = 'assets/phone/phone_newgroup.webp'" #gradientBorder>
           <div class="text">
             <h3 class="text-xl font-semibold mb-2 rainbow-text">Crea grupos y rellénalos de contactos</h3>
-            <p class="text-gray-400 text-justify">Para agrupar rápidamente un conjunto de contactos y sucesos de tu agenda bajo un
+            <p class="text-gray-400 text-justify">Para agrupar rápidamente un conjunto de contactos y sucesos de tu
+              agenda bajo un
               mismo paragüas</p>
+            <div class="bg-gray-800 text-white p-4 rounded-lg shadow-md text-left">
+              <code class="text-sm" style="font-family: 'JetBrains Mono ExtraLight',monospace">
+                &nbsp;&nbsp;lifecycleScope.launch &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val grupoId = db?.grupoDAO()?.addGrupoWithAnotable(nuevoGrupo)?.toInt()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val relaciones = miembros<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter &#123; it.idAnotable != -1 &#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map &#123; miembro -><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ContactoGrupoCrossRef(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idGrupo = grupoId,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idContacto = miembro.idAnotable<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;db?.grupoDAO()?.insertarRelaciones(relaciones)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;creador = mutableListOf()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;miembros = mutableListOf()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;finish()<br>
+                &nbsp;&nbsp;&#125;<br>
+              </code>
+            </div>
           </div>
         </div>
         <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border" #gradientBorder>
@@ -126,29 +154,38 @@
         <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border" #gradientBorder>
           <div class="text">
             <h3 class="text-xl font-semibold mb-2 rainbow-text">Rendimiento excelente con multihilo</h3>
-            <p class="text-gray-400 text-justify">Gracias a las corrutinas de Kotlin, la agenda Spylook puede entregar una
+            <p class="text-gray-400 text-justify">Gracias a las corrutinas de Kotlin, la agenda Spylook puede entregar
+              una
               velocidad
               sin igual en la carga de datos.</p>
             <p class="text-gray-400 text-justify"> Esto se debe al uso de hilos virtuales,
-              una tendencia en auge que permite crear una gran cantidad de hilos "falsos" separados de los hilos de la CPU, permitiendo cambios de contexto más rápidos y facilitando operaciones de I/O</p>
+              una tendencia en auge que permite crear una gran cantidad de hilos "falsos" separados de los hilos de la
+              CPU, permitiendo cambios de contexto más rápidos y facilitando operaciones de I/O</p>
             <br>
             <div class="bg-gray-800 text-white p-4 rounded-lg shadow-md text-left">
               <code class="text-sm" style="font-family: 'JetBrains Mono ExtraLight',monospace">
-                &nbsp;&nbsp;val amistades = db?.contactoDAO()?.getAmigosDeContacto(contacto.id)<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;?.amigos<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;?.filter &#123; it !in newExcluded &#125;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;?.map &#123; amigo -><br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;async &#123; toSingleExportObject(amigo!!, context, deepLevel - 1, newExcluded) &#125;<br>
+                &nbsp;&nbsp;nextButton.setOnClickListener &#123; l: View? -><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;l?.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val contact = createContactFromInput()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;lifecycleScope.launch &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database = AppDatabase.getInstance(this&#64;NuevoContactoActivity)!!<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database.contactoDAO()!!.findContactoByName(contact.nombre)?.let &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AlertDialog.Builder(this&#64;NuevoContactoActivity)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setTitle("Error al crear el contacto")<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setMessage("Ya existe un contacto con ese nombre")<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.show()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&#64;launch<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database.contactoDAO()!!.addContactoWithAnotable(contact)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish()<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;?.map &#123; it.await() &#125;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;?: emptyList()<br>
-                <br>
-                &nbsp;&nbsp;return&#64;coroutineScope SingleExportObject(contacto, anotaciones, sucesos, amistad<br>
+                &nbsp;&nbsp;&#125;<br>
               </code>
             </div>
             <br>
             <p class="text-gray-400 text-justify">Todas las consultas a la base de datos local se realizan en segundo
-              plano con estos hilos virtuales, dejando el hilo principal encargado de la UI de tu agenda libre de posibles bloqueos
+              plano con estos hilos virtuales, dejando el hilo principal encargado de la UI de tu agenda libre de
+              posibles bloqueos
               e interrupciones de la experiencia de usuario</p>
           </div>
         </div>
