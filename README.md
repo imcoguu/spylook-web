@@ -1,4 +1,4 @@
-# Spylook 👀
+# SpyLook Web 👀
 
 Este proyecto consiste en dotar a [SpyLook](https://github.com/cdominguezh06/spylook) de una página web desde la que conocer la aplicación a fondo y ofrecer enlaces de descarga,
 conectandose a la API REST de GitHub y listando todos los releases publicados en el repositorio hasta la fecha
@@ -77,3 +77,46 @@ de las notas de la versión con `replace.tags.pipe.ts`
 ## FooterComponent
 
 Pie de página con fondo de arcoíris
+
+
+# Deploy
+
+El deploy se lleva a cabo mediante la libreria NPM de [AngularCLI GhPages](https://www.npmjs.com/package/angular-cli-ghpages)
+que, como bien se explicó al inicio, hace uso de GitHub Pages para hospedar la página web
+
+
+El comando para realizar el deploy es el siguiente
+```bash
+ng deploy --base-href="https://cdominguezh06.github.io/spylook-web/"
+```
+
+Este comando genera los archivos estáticos de la página mediante ng build y los sube a GitHub Pages, el cual
+sirve la página bajo un dominio gratuito y con protocolo HTTPS
+
+> [!Note]
+> Usar archivos estáticos (HTML,CSS y JS) permite reducir el tiempo de carga de la página web
+
+También se ha registrado la página en [Google Search Console](https://search.google.com/search-console/about) para facilitar el indexado de la misma
+en el buscador de Google
+
+Actualmente las búsquedas que mejor posicionan la página son
+1. SpyLook agenda (primera posición)
+2. SpyLook android (tercera posición)
+3. SpyLook app (cuarta posición)
+
+A su vez, buscar una captura de pantalla de la aplicación en Google Lens dará como primer resultado la página web
+
+# Métricas de rendimiento web
+
+Haciendo uso de [PageSpeed Insights](https://pagespeed.web.dev) se pueden obtener métricas de rendimiento, accesibilidad,
+prácticas recomendadas y SEO sobre la página web, haciendo una prueba para la versión de dispositivos móviles y otra para
+dispositivos de escritorio
+
+El resultado de las métricas es el siguiente:
+### Móvil 
+
+  ![img.png](docs/lighthouse_phone.png)
+
+### Escritorio
+
+  ![img.png](docs/lighthouse_desktop.png)
