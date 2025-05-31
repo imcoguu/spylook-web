@@ -108,6 +108,49 @@
             <p class="text-gray-400 text-justify">Para anotar en la agenda cualquier cosa que ciertas personas
               indeseables te hayan
               hecho</p>
+            <br>
+            <div class="bg-gray-800 text-white p-4 rounded-lg shadow-md text-left">
+              <code class="text-sm" style="font-family: 'JetBrains Mono ExtraLight',monospace">
+                &nbsp;&nbsp;boton.setOnClickListener &#123; l: View? -><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;l?.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;var alert = AlertDialog.Builder(this).setTitle("Error al crear el suceso")<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val nombreSuceso = textNombreSuceso.text.toString().trim()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;if (nombreSuceso.isEmpty()) &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert.setMessage("Por favor, ingresa un nombre para el suceso").show()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&#64;setOnClickListener<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;if (causante.none &#123; it.idAnotable != -1 &#125;) &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert.setMessage("Debes agregar un causante").show()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&#64;setOnClickListener<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val origenIsInSuceso = implicados<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter &#123; it.idAnotable == anotableOrigen &#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toMutableList()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.apply &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addAll(causante.filter &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it.idAnotable == anotableOrigen<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;origenIsInSuceso.ifEmpty &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert.setMessage("El contacto actual debe ser parte del suceso
+                (causante o implicado)").show()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&#64;setOnClickListener<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val color = Color.rgb((0..255).random(), (0..255).random(), (0..255).random())<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val fecha = textFechaSuceso.text.toString()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val descripcion = textDescripcionSuceso.text.toString()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val lugar = textLugarSuceso.text.toString()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val suceso = Suceso(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idAnotable = 0,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nombre = nombreSuceso,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fecha = fecha,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lugar = lugar,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;descripcion = descripcion,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colorFoto = color,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idCausante = causante.first().idAnotable<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;)<br>
+              </code>
+            </div>
           </div>
         </div>
         <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border"
@@ -115,6 +158,26 @@
           <div class="text">
             <h3 class="text-xl font-semibold mb-2 rainbow-text">...y asócialos a las personas culpables</h3>
             <p class="text-gray-400 text-justify">Para dejar constancia de quién fue el cabecilla y quienes ayudaron</p>
+            <br>
+            <div class="bg-gray-800 text-white p-4 rounded-lg shadow-md text-left">
+              <code class="text-sm" style="font-family: 'JetBrains Mono ExtraLight',monospace">
+                &nbsp;&nbsp;suspend fun insertarRelaciones(sucesoId: Int)&#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val relaciones = implicados<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter &#123; it.idAnotable != -1 &#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map &#123; miembro -><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ContactoSucesoCrossRef(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idSuceso = sucesoId,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idContacto = miembro.idAnotable<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;relaciones.ifEmpty &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;db.sucesoDAO()!!.insertarRelaciones(relaciones)<br>
+                &nbsp;&nbsp;&#125;<br>
+              </code>
+            </div>
           </div>
         </div>
         <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border"
@@ -152,15 +215,39 @@
               olvides!</h3>
             <p class="text-gray-400 text-justify">Con pulsar unos pocos botones podrás recordar las relaciones entre tus
               contactos, porque aquí nadie quiere muy cerca a gente que se relacione con indeseables, ¿verdad?</p>
+            <br>
+            <div class="bg-gray-800 text-white p-4 rounded-lg shadow-md text-left">
+              <code class="text-sm" style="font-family: 'JetBrains Mono ExtraLight',monospace">
+                &nbsp;&nbsp;private suspend fun fetchAmigos(contactoDAO: ContactoDAO): MutableList&lt;ContactoCardItem&gt; &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val busquedaComoContacto = contactoDAO.getAmistadesPorContacto(contacto.idAnotable).map &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contactoDAO.findContactoById(it.idAmigo)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#125;.toMutableList()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val busquedaComoAmigo = contactoDAO.getContactosPorAmigo(contacto.idAnotable).map &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contactoDAO.findContactoById(it.idContacto)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#125;.toMutableList()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;busquedaComoAmigo.addAll(busquedaComoContacto)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;val amigos = busquedaComoAmigo.distinct().map &#123;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mapper.toCardItem(it)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&#125;.toMutableList()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;amigos.add(ContactoCardItem(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idAnotable = -1,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nombre = "Añade más amigos",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alias = "Agregar",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colorFoto = R.drawable.notfound,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clickable = false<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;))<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return amigos<br>
+                &nbsp;&nbsp;&#125;<br>
+              </code>
+            </div>
           </div>
         </div>
-        <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border">
+        <div class="p-6 shadow-lg rounded-lg bg-gray-800 text-right gradient-border"
+             (mouseenter)="this.selected = 'assets/phone/phone_coroutines.webp'">
           <div class="text">
             <h3 class="text-xl font-semibold mb-2 rainbow-text">Rendimiento excelente con multihilo</h3>
             <p class="text-gray-400 text-justify">Gracias a las corrutinas de Kotlin, la agenda Spylook puede entregar
-              una
-              velocidad
-              sin igual en la carga de datos.</p>
+              una velocidad sin igual en la carga de datos.</p>
             <p class="text-gray-400 text-justify"> Esto se debe al uso de hilos virtuales,
               una tendencia en auge que permite crear una gran cantidad de hilos "falsos" separados de los hilos de la
               CPU, permitiendo cambios de contexto más rápidos y facilitando operaciones de I/O</p>

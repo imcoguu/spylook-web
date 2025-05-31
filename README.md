@@ -59,3 +59,21 @@ color rojo sigue la posición del ratón al posicionarse sobre este
 
 Section que almacena una imagen y varios `<div>` con la clase CSS `gradient-border` para que `global-effects.service.ts`
 aplique un efecto de gradiente interactivo al borde de los elementos
+
+Estos `<div>` cuentan con un pequeño *snippet* de código para mostrar parte de la funcionalidad de la característica que detallan
+
+## DownloadComponent
+
+Section que muestra el release más reciente de la aplicación sacado desde la API REST de GitHub mediante
+`git-hub.service.ts`. Muestra a su vez las notas de la versión, tratando el texto Markdown con `replace.tags.pipe.ts`
+para mostrar un texto estilado con etiquetas HTML
+
+## TimelineComponent
+
+Section que se conecta a la API REST de GitHub mediante `git-hub.service.ts` y muestra todos los releases
+anteriores al mostrado en `download.component.html`. Al igual que el componente anterior, trata el texto Markdown
+de las notas de la versión con `replace.tags.pipe.ts`
+
+## FooterComponent
+
+Pie de página con fondo de arcoíris

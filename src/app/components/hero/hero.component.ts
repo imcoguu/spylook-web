@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-hero',
@@ -6,9 +6,6 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.css'
 })
-export class HeroComponent implements OnInit {
-  ngOnInit(): void {
-
-  }
+export class HeroComponent {
 
 }
