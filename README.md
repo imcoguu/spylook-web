@@ -1,59 +1,61 @@
-# SpylookWeb
+# Spylook 👀
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
+Este proyecto consiste en dotar a [SpyLook](https://github.com/cdominguezh06/spylook) de una página web desde la que conocer la aplicación a fondo y ofrecer enlaces de descarga,
+conectandose a la API REST de GitHub y listando todos los releases publicados en el repositorio hasta la fecha
 
-## Development server
 
-To start a local development server, run:
+# Funcionamiento de la web
 
-```bash
-ng serve
+La web está construida utilizando [Angular 19.2.11](https://v19.angular.dev), con TailwindCSS aportando clases de CSS predefinidas
+para estilar la página
+
+Además se ha hecho uso de [AngularCLI GhPages](https://www.npmjs.com/package/angular-cli-ghpages) para el deploy de la página web en
+GitHub Pages, ofreciendo así un hosting gratuito lo suficientemente maleable para este proyectoo
+
+
+# Estructura
+
+La estructura de la página web está dividida en varios componentes de Angular:
+```
+components/
+ ├── download/        # El release más reciente de la aplicación
+ ├── features/        # Imagen de la aplicación que cambia según la característica sobre la que poses el ratón
+ ├── footer/          # Pie de página
+ ├── header/          # Cabecera de la página con enlace a repositorio, apartado de características y perfil de GitHub
+ ├── hero/            # Banner de inicio de la página, con botón de CTA (Call To Action) que lleva al componente download
+ └── timeline/        # Lista de todos los releases de la aplicación, ordenados de más reciente a más antiguo
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+A su vez, el proyecto cuenta con los siguientes directorios adicionales:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+app/
+ ├── pipes/
+ │    └── replace-tags.pipe.ts        # Clase que acepta un texto en Markdown sin formatear 
+ │                                      y reemplaza el etiquetado Markdown por etiquetas HTML estiladas
+ └── services/
+      ├── global-effects.service.ts   # Servicio que aplica animaciones y efectos interactivos a elementos del DOM
+      └── git-hub.service.ts          # Servicio que toma de la API REST de GitHub el historial de releases de SpyLook
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+# Componentes
 
-```bash
-ng generate --help
-```
+A continuación se detalla el funcionamiento de cada componente en orden de aparición
 
-## Building
+## HeaderComponent
 
-To build the project run:
+Todo su contenido es almacenado en una etiqueta `<header>` con un efecto de arcoíris como color de fondo
+Cuenta con un título `<h1>` que redirige al repositorio de la app de Android y un elemento `<nav>` con enlaces
+al apartado de características y al perfil de GitHub
 
-```bash
-ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## HeroComponent
 
-## Running unit tests
+Todo su contenido se almacena en una etiqueta `<section>` con fondo negro. 
+El título `<h1>` es modificado por `global-effects.service.ts` para tener un color arcoíris cuyo
+color rojo sigue la posición del ratón al posicionarse sobre este
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## FeaturesComponent
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Section que almacena una imagen y varios `<div>` con la clase CSS `gradient-border` para que `global-effects.service.ts`
+aplique un efecto de gradiente interactivo al borde de los elementos

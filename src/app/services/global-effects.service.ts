@@ -71,10 +71,10 @@ export class GlobalEffectsService {
       const x = event.clientX - rect.left;
       const width = rect.width;
 
-      const percentage = 100 - (x / width) * 100;
+      const percentage = 100 - (x / width) / 1000;
       element.style.setProperty(
         'background-image',
-        `linear-gradient(black,black), linear-gradient(${percentage}deg, ${color})`
+        `linear-gradient(black,black), linear-gradient(${(rect.left*2 * percentage)-2*(rect.left*2 * percentage)}turn, ${color})`
       );
     });
   }
