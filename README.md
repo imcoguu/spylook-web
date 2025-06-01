@@ -1,3 +1,7 @@
+[![Carlos | Coguu](https://img.shields.io/badge/Carlos-Coguu-blue)](https://github.com/cdominguezh06)
+[![Web Deployment](https://img.shields.io/badge/Web-Deployment-purple?logo=angular)](https://cdominguezh06.github.io/spylook-web/)
+[![Android Repository](https://img.shields.io/badge/%20Android-Repository-green?logo=android)](https://github.com/cdominguezh06/spylook)
+
 # SpyLook Web 👀
 
 Este proyecto consiste en dotar a [SpyLook](https://github.com/cdominguezh06/spylook) de una página web desde la que conocer la aplicación a fondo y ofrecer enlaces de descarga,
